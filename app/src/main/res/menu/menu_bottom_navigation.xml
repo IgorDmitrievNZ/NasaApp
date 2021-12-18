@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_one"
+        android:icon="@drawable/ic_archive"
+        android:title="Screen 1" />
+    <item
+        android:id="@+id/navigation_two"
+        android:icon="@drawable/ic_send"
+        android:title="Screen 2" />
+
+    <item
+        android:id="@+id/navigation_lesson_one"
+        android:icon="@drawable/ic_education_24"
+        android:title="@string/chips" />
+
+</menu>

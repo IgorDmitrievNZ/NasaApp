@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bottom_sheet_background"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="130dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/bottom_sheet_description_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dim_5dp"
+        android:paddingStart="@dimen/dim_10dp"
+        android:paddingEnd="@dimen/dim_10dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="@dimen/ts_20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line"
+        tools:text="Two Clusters and a Comet" />
+
+    <TextView
+        android:id="@+id/bottom_sheet_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/ts_16sp"
+        android:paddingStart="@dimen/dim_10dp"
+        android:paddingEnd="@dimen/dim_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_description_header"
+        tools:text="This lovely starfield spans some four full moons." />
+
+    <View
+        android:id="@+id/bottom_sheet_line"
+        android:layout_width="@dimen/dim_25dp"
+        android:layout_height="@dimen/dim_1dp"
+        android:layout_marginTop="@dimen/dim_5dp"
+        android:background="@color/bottom_sheet_line_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
