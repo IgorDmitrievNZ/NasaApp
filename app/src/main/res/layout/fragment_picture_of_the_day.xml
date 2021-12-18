@@ -11,7 +11,7 @@
         android:padding="@dimen/dim_10dp">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroupPicture"
+            android:id="@+id/chipGroupForPicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:singleSelection="true"
@@ -24,14 +24,14 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today's photo" />
+                android:text="@string/today_s_photo" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipHDdPhoto"
+                android:id="@+id/chipYesterdayPhoto"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HD photo" />
+                android:text="@string/yesterday_s_photo" />
 
         </com.google.android.material.chip.ChipGroup>
 
