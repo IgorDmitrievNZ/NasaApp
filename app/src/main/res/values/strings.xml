@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">NasaApp</string>
+
+    <string name="photo_of_the_day_stub">Photo of the day</string>
+    <string name="search_wiki">Search on wikipedia</string>
+    <string name="wiki_helper_text">Try to find in wikipedia</string>
+    <string name="favourite">Favourite</string>
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="chips">Chips</string>
+    <string name="today_s_photo">Today\'s photo</string>
+    <string name="yesterday_s_photo">Yesterday\'s photo</string>
 </resources>
