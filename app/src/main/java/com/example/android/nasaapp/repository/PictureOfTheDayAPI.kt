@@ -10,5 +10,9 @@ This interface creates an API call to server
 
 interface PictureOfTheDayAPI {
     @GET("planetary/apod")
-    fun getPictureOfTheDay(@Query("api_key") apiKey: String): Call<PictureOfTheDayResponseData>
+
+    fun getPictureOfTheDay(
+        @Query("api_key") apiKey: String,
+        @Query("date") date: String? = null
+    ): Call<PictureOfTheDayResponseData>
 }

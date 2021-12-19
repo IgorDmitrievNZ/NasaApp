@@ -24,7 +24,7 @@ class PictureOfTheDayFragment : Fragment() {
 
     private var isMain = true
     private var url: String? = null
-    private var urlHD: String? = null
+    private var urlYesterday: String? = null
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
@@ -53,22 +53,27 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.chipGroupPicture.setOnCheckedChangeListener { group, _ ->
+        binding.chipGroupForPicture.setOnCheckedChangeListener { group, _ ->
             when (group.checkedChipId) {
 
                 R.id.chipTodayPhoto -> {
-                    Toast.makeText(context, "Normal", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Today", Toast.LENGTH_SHORT).show()
                     loadImage(url)
 
                 }
-                R.id.chipHDdPhoto -> {
-                    Toast.makeText(context, "HD", Toast.LENGTH_SHORT).show()
-                    loadImage(urlHD)
+                R.id.chipYesterdayPhoto -> {
+                    Toast.makeText(context, "Yesterday", Toast.LENGTH_SHORT).show()
+                    loadImage(urlYesterday)
                 }
             }
         }
+
         viewModel.getData().observe(viewLifecycleOwner, Observer {
             renderData(it)
+        })
+
+        viewModel.getYesterdayData().observe(viewLifecycleOwner, Observer {
+            renderYesterdayData(it)
         })
         viewModel.sendServerRequest()
 
@@ -94,13 +99,28 @@ class PictureOfTheDayFragment : Fragment() {
             is AppState.Success -> {
                 val pictureOfTheDayResponseData = state.pictureOfTheDayResponseData
                 url = pictureOfTheDayResponseData.url
-                urlHD = pictureOfTheDayResponseData.hdURL
                 val description = pictureOfTheDayResponseData.explanation
                 val title = pictureOfTheDayResponseData.title
 
                 includeBottomSheet.bottomSheetDescription.setText(description).toString()
                 includeBottomSheet.bottomSheetDescriptionHeader.setText(title).toString()
                 loadImage(url)
+            }
+        }
+    }
+
+    private fun renderYesterdayData(state: AppState) = with(binding) {
+        when (state) {
+            is AppState.Error -> {
+                imageView.load(R.drawable.ic_load_error_vector)
+                Toast.makeText(context, "No data from server", Toast.LENGTH_SHORT).show()
+            }
+            is AppState.Loading -> {
+                imageView.load(R.drawable.ic_no_photo_vector)
+            }
+            is AppState.Success -> {
+                val pictureOfTheDayResponseData = state.pictureOfTheDayResponseData
+                urlYesterday = pictureOfTheDayResponseData.url
             }
         }
     }
