@@ -18,6 +18,7 @@ import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.FragmentPictureOfTheDayBinding
 import com.example.android.nasaapp.ui.AppState
 import com.example.android.nasaapp.ui.MainActivity
+import com.example.android.nasaapp.ui.settings.SettingsFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 
 class PictureOfTheDayFragment : Fragment() {
@@ -25,6 +26,7 @@ class PictureOfTheDayFragment : Fragment() {
     private var isMain = true
     private var url: String? = null
     private var urlYesterday: String? = null
+    private var urlBeforeYesterday: String? = null
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
@@ -55,15 +57,17 @@ class PictureOfTheDayFragment : Fragment() {
 
         binding.chipGroupForPicture.setOnCheckedChangeListener { group, _ ->
             when (group.checkedChipId) {
-
-                R.id.chipTodayPhoto -> {
-                    Toast.makeText(context, "Today", Toast.LENGTH_SHORT).show()
-                    loadImage(url)
-
-                }
                 R.id.chipYesterdayPhoto -> {
                     Toast.makeText(context, "Yesterday", Toast.LENGTH_SHORT).show()
-                    loadImage(urlYesterday)
+                    onChipClicked(urlYesterday, DayType.YESTERDAY)
+                }
+                R.id.chipBeforeYesterdayPhoto -> {
+                    Toast.makeText(context, "Before Yesterday", Toast.LENGTH_SHORT).show()
+                    onChipClicked(urlBeforeYesterday, DayType.BEFORE_YESTERDAY)
+                }
+                else -> {
+                    Toast.makeText(context, "Today", Toast.LENGTH_SHORT).show()
+                    onChipClicked(url, DayType.TODAY)
                 }
             }
         }
@@ -71,11 +75,8 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
-
-        viewModel.getYesterdayData().observe(viewLifecycleOwner, Observer {
-            renderYesterdayData(it)
-        })
-        viewModel.sendServerRequest()
+        // load default image
+        if (url.isNullOrBlank()) viewModel.sendServerRequest(DayType.TODAY)
 
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -98,29 +99,20 @@ class PictureOfTheDayFragment : Fragment() {
             }
             is AppState.Success -> {
                 val pictureOfTheDayResponseData = state.pictureOfTheDayResponseData
-                url = pictureOfTheDayResponseData.url
+                val dayType = viewModel.getResultDayType(pictureOfTheDayResponseData.date)
+                val currentUrl = pictureOfTheDayResponseData.url
+                when (dayType) {
+                    DayType.TODAY -> url = currentUrl
+                    DayType.YESTERDAY -> urlYesterday = currentUrl
+                    DayType.BEFORE_YESTERDAY -> urlBeforeYesterday = currentUrl
+                }
+                loadImage(currentUrl)
+
                 val description = pictureOfTheDayResponseData.explanation
                 val title = pictureOfTheDayResponseData.title
 
                 includeBottomSheet.bottomSheetDescription.setText(description).toString()
                 includeBottomSheet.bottomSheetDescriptionHeader.setText(title).toString()
-                loadImage(url)
-            }
-        }
-    }
-
-    private fun renderYesterdayData(state: AppState) = with(binding) {
-        when (state) {
-            is AppState.Error -> {
-                imageView.load(R.drawable.ic_load_error_vector)
-                Toast.makeText(context, "No data from server", Toast.LENGTH_SHORT).show()
-            }
-            is AppState.Loading -> {
-                imageView.load(R.drawable.ic_no_photo_vector)
-            }
-            is AppState.Success -> {
-                val pictureOfTheDayResponseData = state.pictureOfTheDayResponseData
-                urlYesterday = pictureOfTheDayResponseData.url
             }
         }
     }
@@ -133,6 +125,14 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+    private fun onChipClicked(currentUrl: String?, dayType: DayType) {
+        if (currentUrl.isNullOrBlank()) {
+            viewModel.sendServerRequest(dayType)
+        } else {
+            loadImage(currentUrl)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
@@ -141,7 +141,9 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
-            R.id.app_bar_settings -> Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
+
+            R.id.app_bar_settings -> openFragment(SettingsFragment.newInstance())
+
             android.R.id.home -> BottomNavigationDrawerFragment().show(
                 requireActivity().supportFragmentManager,
                 ""
@@ -208,6 +210,15 @@ class PictureOfTheDayFragment : Fragment() {
                     }
                 }
             })
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        parentFragmentManager.apply {
+            beginTransaction()
+                .add(R.id.container, fragment)
+                .addToBackStack("")
+                .commitAllowingStateLoss()
+        }
     }
 
     companion object {
