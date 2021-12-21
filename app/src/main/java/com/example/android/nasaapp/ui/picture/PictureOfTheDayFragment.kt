@@ -20,6 +20,7 @@ import com.example.android.nasaapp.ui.AppState
 import com.example.android.nasaapp.ui.MainActivity
 import com.example.android.nasaapp.ui.settings.SettingsFragment
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -27,6 +28,7 @@ class PictureOfTheDayFragment : Fragment() {
     private var url: String? = null
     private var urlYesterday: String? = null
     private var urlBeforeYesterday: String? = null
+    private lateinit var behavior: BottomSheetBehavior<View>
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
@@ -54,6 +56,8 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        behavior = BottomSheetBehavior.from(binding.includeBottomSheet.bottomSheetContainer)
 
         binding.chipGroupForPicture.setOnCheckedChangeListener { group, _ ->
             when (group.checkedChipId) {
@@ -84,7 +88,6 @@ class PictureOfTheDayFragment : Fragment() {
                     Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
-
         setBottomAppBar()
     }
 
@@ -158,8 +161,10 @@ class PictureOfTheDayFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding.fab.setOnClickListener {
+
             if (isMain) {
                 isMain = false
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                 binding.fab.setImageDrawable(
@@ -171,6 +176,7 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_2)
             } else {
                 isMain = true
+                behavior.state = BottomSheetBehavior.STATE_COLLAPSED
                 binding.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
@@ -194,6 +200,7 @@ class PictureOfTheDayFragment : Fragment() {
                         System.exit(0)
                     } else {
                         isMain = true
+                        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
                         binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(
                             context,
                             R.drawable.ic_hamburger_menu_bottom_bar
