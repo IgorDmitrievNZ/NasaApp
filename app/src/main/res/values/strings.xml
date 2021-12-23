@@ -11,4 +11,7 @@
     <string name="today_s_photo">Today</string>
     <string name="yesterday_s_photo">Yesterday</string>
     <string name="before_yesterday_s_photo">Before yesterday</string>
+    <string name="day_theme">Day Theme</string>
+    <string name="night_theme">Night Theme</string>
+    <string name="mars_theme">Mars Theme</string>
 </resources>

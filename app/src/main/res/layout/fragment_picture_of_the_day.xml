@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/teal_700"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         app:fabAlignmentMode="center"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
 
@@ -95,7 +95,6 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/geekBrainsAccent"
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_plus_fab"
         app:tint="@color/white" />

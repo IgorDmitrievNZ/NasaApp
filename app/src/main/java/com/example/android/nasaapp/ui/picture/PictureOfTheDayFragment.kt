@@ -19,16 +19,20 @@ import com.example.android.nasaapp.databinding.FragmentPictureOfTheDayBinding
 import com.example.android.nasaapp.ui.AppState
 import com.example.android.nasaapp.ui.MainActivity
 import com.example.android.nasaapp.ui.settings.SettingsFragment
+import com.example.android.nasaapp.utils.openFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class PictureOfTheDayFragment : Fragment() {
+
+    private val backStackName: String = "PictureOfTheDayFragment"
 
     private var isMain = true
     private var url: String? = null
     private var urlYesterday: String? = null
     private var urlBeforeYesterday: String? = null
     private lateinit var behavior: BottomSheetBehavior<View>
+
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
@@ -145,7 +149,11 @@ class PictureOfTheDayFragment : Fragment() {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
 
-            R.id.app_bar_settings -> openFragment(SettingsFragment.newInstance())
+            R.id.app_bar_settings -> openFragment(
+                requireActivity(),
+                SettingsFragment.newInstance(),
+                backStackName
+            )
 
             android.R.id.home -> BottomNavigationDrawerFragment().show(
                 requireActivity().supportFragmentManager,
@@ -217,15 +225,6 @@ class PictureOfTheDayFragment : Fragment() {
                     }
                 }
             })
-    }
-
-    private fun openFragment(fragment: Fragment) {
-        parentFragmentManager.apply {
-            beginTransaction()
-                .add(R.id.container, fragment)
-                .addToBackStack("")
-                .commitAllowingStateLoss()
-        }
     }
 
     companion object {

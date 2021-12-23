@@ -6,12 +6,15 @@ import android.widget.Toast
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.BottomNavigationLayoutBinding
 import com.example.android.nasaapp.ui.chips.ChipsFragment
+import com.example.android.nasaapp.utils.openFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
+    private val backStackName: String = "BottomNavigationDrawerFragment"
+
     private var _binding: BottomNavigationLayoutBinding? = null
-    val binding: BottomNavigationLayoutBinding
+    private val binding: BottomNavigationLayoutBinding
         get() {
             return _binding!!
         }
@@ -34,8 +37,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                     Toast.makeText(context,"2",Toast.LENGTH_SHORT).show()
                 }
                 R.id.navigation_lesson_one -> {
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,
-                ChipsFragment.newInstance()).commit()
+                    openFragment(requireActivity(),ChipsFragment.newInstance(),backStackName)
                 }
             }
 
