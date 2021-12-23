@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.FragmentChipsBinding
 import com.google.android.material.chip.Chip
 
@@ -13,7 +14,7 @@ class ChipsFragment : Fragment() {
 
 
     private var _binding: FragmentChipsBinding? = null
-    val binding: FragmentChipsBinding
+    private val binding: FragmentChipsBinding
         get() {
             return _binding!!
         }
@@ -44,6 +45,22 @@ class ChipsFragment : Fragment() {
         binding.chipForDelete.setOnCloseIconClickListener {
             //binding.chipForDelete.visibility = View.GONE
             binding.chipForDelete.isChecked = false
+        }
+        binding.tabs.getTabAt(0)?.text = "works"
+
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_one -> {
+                    Toast.makeText(context, "1", Toast.LENGTH_SHORT).show()
+                }
+                R.id.navigation_two -> {
+                    Toast.makeText(context, "2", Toast.LENGTH_SHORT).show()
+                }
+                R.id.navigation_lesson_one -> {
+                    Toast.makeText(context, "3", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
         }
     }
 

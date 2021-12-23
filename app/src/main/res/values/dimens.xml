@@ -7,4 +7,5 @@
     <dimen name="dim_1dp">1dp</dimen>
     <dimen name="ts_20sp">20sp</dimen>
     <dimen name="ts_16sp">16sp</dimen>
+    <dimen name="settings_margin_top_10">10dp</dimen>
 </resources>
