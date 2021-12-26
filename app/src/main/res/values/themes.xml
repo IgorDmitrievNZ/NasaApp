@@ -53,4 +53,13 @@
         <item name="android:fontFamily">cursive</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="colorSurface">@color/colorAccent</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorPrimarySurface">@color/color_gray</item>
+        <item name="colorOnPrimarySurface">@color/color_connected</item>
+    </style>
+
 </resources>

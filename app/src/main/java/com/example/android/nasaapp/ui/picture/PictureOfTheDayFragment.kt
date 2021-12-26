@@ -63,18 +63,17 @@ class PictureOfTheDayFragment : Fragment() {
 
         behavior = BottomSheetBehavior.from(binding.includeBottomSheet.bottomSheetContainer)
 
+        //Click listener for chips below the photo
         binding.chipGroupForPicture.setOnCheckedChangeListener { group, _ ->
             when (group.checkedChipId) {
+
                 R.id.chipYesterdayPhoto -> {
-                    Toast.makeText(context, "Yesterday", Toast.LENGTH_SHORT).show()
                     onChipClicked(urlYesterday, DayType.YESTERDAY)
                 }
                 R.id.chipBeforeYesterdayPhoto -> {
-                    Toast.makeText(context, "Before Yesterday", Toast.LENGTH_SHORT).show()
                     onChipClicked(urlBeforeYesterday, DayType.BEFORE_YESTERDAY)
                 }
                 else -> {
-                    Toast.makeText(context, "Today", Toast.LENGTH_SHORT).show()
                     onChipClicked(url, DayType.TODAY)
                 }
             }
@@ -83,6 +82,7 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
+
         // load default image
         if (url.isNullOrBlank()) viewModel.sendServerRequest(DayType.TODAY)
 
@@ -105,7 +105,7 @@ class PictureOfTheDayFragment : Fragment() {
                 imageView.load(R.drawable.ic_no_photo_vector)
             }
             is AppState.Success -> {
-                val pictureOfTheDayResponseData = state.pictureOfTheDayResponseData
+                val pictureOfTheDayResponseData = state.responseData
                 val dayType = viewModel.getResultDayType(pictureOfTheDayResponseData.date)
                 val currentUrl = pictureOfTheDayResponseData.url
                 when (dayType) {
@@ -145,9 +145,17 @@ class PictureOfTheDayFragment : Fragment() {
         inflater.inflate(R.menu.menu_bottom_bar, menu)
     }
 
+    /**
+     * This function opens fragments and activities in bottom app bar.
+     */
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
+
+            R.id.app_bar_telescope -> Toast.makeText(context, "telescope", Toast.LENGTH_SHORT)
+                .show()
+
+            R.id.app_bar_fav -> Toast.makeText(context, "favorite", Toast.LENGTH_SHORT).show()
 
             R.id.app_bar_settings -> openFragment(
                 requireActivity(),
