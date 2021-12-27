@@ -18,6 +18,7 @@ import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.FragmentPictureOfTheDayBinding
 import com.example.android.nasaapp.ui.AppState
 import com.example.android.nasaapp.ui.MainActivity
+import com.example.android.nasaapp.ui.mars.NavBottomActivityMars
 import com.example.android.nasaapp.ui.settings.SettingsFragment
 import com.example.android.nasaapp.utils.openFragment
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -152,8 +153,18 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 
-            R.id.app_bar_telescope -> Toast.makeText(context, "telescope", Toast.LENGTH_SHORT)
-                .show()
+            R.id.app_bar_telescope -> startActivity(
+                Intent(
+                    requireContext(),                       //start activity MARS
+                    NavBottomActivityMars::class.java
+                )
+            )
+
+//            R.id.app_bar_telescope -> openFragment(
+//                requireActivity(),
+//                MarsHomeWorkFragment.newInstance(),
+//                backStackName
+//            )
 
             R.id.app_bar_fav -> Toast.makeText(context, "favorite", Toast.LENGTH_SHORT).show()
 

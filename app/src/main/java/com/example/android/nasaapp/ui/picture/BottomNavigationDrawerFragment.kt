@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.BottomNavigationLayoutBinding
 import com.example.android.nasaapp.ui.chips.ChipsFragment
-import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.ViewPagerActivity
 import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.NavBottomActivity
+import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.ViewPagerActivity
 import com.example.android.nasaapp.utils.openFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

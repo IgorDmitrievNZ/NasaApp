@@ -1,9 +1,9 @@
-package com.example.android.nasaapp.repository
+package com.example.android.nasaapp.repository.picture_of_the_day_api
 
 import com.google.gson.annotations.SerializedName
 
 /*
-This data class creates server response
+This data class creates server response for picture of the day data
  */
 
 data class PictureOfTheDayResponseData(

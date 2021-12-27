@@ -19,4 +19,7 @@
     <string name="system">System</string>
     <string name="navigation_drawer_activity">Navigation drawer activity</string>
     <string name="tab_layout_activity">Tab layout activity</string>
+    <string name="photos">Photos</string>
+    <string name="current_weather">Current weather</string>
+    <string name="not_yet_implemented">Not yet implemented.</string>
 </resources>
