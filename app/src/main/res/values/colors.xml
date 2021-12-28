@@ -14,4 +14,43 @@
     <color name="geekBrainsPrimary">#008577</color>
     <color name="geekBrainsPrimaryDark">#00574B</color>
     <color name="geekBrainsAccent">#D81B60</color>
+    <color name="lesson2_Green">#01F71A</color>
+
+            <!-- lesson 2 colors -->
+    <color name="purple_200_lesson2">#FFBB86FC</color>
+    <color name="purple_500_lesson2">#47FC0B</color>
+    <color name="purple_700_lesson2">#FF3700B3</color>
+    <color name="teal_200_lesson2">#FF03DAC5</color>
+    <color name="teal_700_lesson2">#FF018786</color>
+    <color name="black_lesson2">#FF000000</color>
+    <color name="white_lesson2">#FFFFFFFF</color>
+
+    <color name="color_gray_lesson2">#66000000</color>
+    <color name="color_green_lesson2">#51FF00</color>
+    <color name="color_black">#070707</color>
+
+    <color name="colorPrimary_lesson2">#212121</color>
+    <color name="colorPrimaryDark_lesson2">#000000</color>
+    <color name="colorAccent_lesson2">#2962FF</color>
+    <color name="background_lesson2">#FAFAFA</color>
+
+    <color name="color_connected">#B200FF</color>
+    <color name="color_disconnected">#FF0000</color>
+
+                <!-- Mars colors -->
+    <color name="primaryMars">#ff7043</color>
+    <color name="backgroundMars">#fff0ec</color>
+    <color name="primaryVariantMars">#c63f17</color>
+    <color name="onPrimaryMars">#F5F5F6</color>
+    <color name="secondaryMars">#607d8b</color>
+    <color name="secondaryVariantMars">#34515e</color>
+    <color name="onSecondaryMars">#000000</color>
+
+                    <!--lesson 3-->
+
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#2962FF</color>
+    <color name="colorAccent40Alfa">#662962FF</color>
+    <color name="background">#FAFAFA</color>
 </resources>
