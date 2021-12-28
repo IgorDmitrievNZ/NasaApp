@@ -14,4 +14,12 @@
     <string name="day_theme">Day Theme</string>
     <string name="night_theme">Night Theme</string>
     <string name="mars_theme">Mars Theme</string>
+    <string name="earth">Earth</string>
+    <string name="mars">Mars</string>
+    <string name="system">System</string>
+    <string name="navigation_drawer_activity">Navigation drawer activity</string>
+    <string name="tab_layout_activity">Tab layout activity</string>
+    <string name="photos">Photos</string>
+    <string name="current_weather">Current weather</string>
+    <string name="not_yet_implemented">Not yet implemented.</string>
 </resources>

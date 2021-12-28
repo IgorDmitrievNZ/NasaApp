@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.nasaapp.BuildConfig
-import com.example.android.nasaapp.repository.PictureOfTheDayResponseData
-import com.example.android.nasaapp.repository.PictureOfTheDayRetrofitImpl
+import com.example.android.nasaapp.repository.RetrofitImpl
+import com.example.android.nasaapp.repository.picture_of_the_day_api.PictureOfTheDayResponseData
 import com.example.android.nasaapp.ui.AppState
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,7 +16,7 @@ import java.util.*
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<AppState> = MutableLiveData(),
-    private val retrofitImpl: PictureOfTheDayRetrofitImpl = PictureOfTheDayRetrofitImpl()
+    private val retrofitImpl: RetrofitImpl = RetrofitImpl()
 ) : ViewModel() {
     private val yesterday = getDaysAgo(1)
     private val beforeYesterday = getDaysAgo(2)

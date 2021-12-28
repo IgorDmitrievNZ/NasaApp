@@ -32,7 +32,7 @@
 
     <style name="MyCardViewStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/purple_700</item>
-        <item name="cardCornerRadius">100dp</item>
+        <item name="cardCornerRadius">10dp</item>
         <item name="android:textAppearance">@style/CustomStyle</item>
     </style>
 
@@ -53,4 +53,12 @@
         <item name="android:fontFamily">cursive</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="colorSurface">@color/secondaryMars</item>
+        <item name="colorOnSurface">@color/backgroundMars</item>
+        <item name="colorPrimarySurface">@color/color_black</item>
+    </style>
+
 </resources>

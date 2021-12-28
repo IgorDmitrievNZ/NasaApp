@@ -45,4 +45,12 @@
     <color name="secondaryMars">#607d8b</color>
     <color name="secondaryVariantMars">#34515e</color>
     <color name="onSecondaryMars">#000000</color>
+
+                    <!--lesson 3-->
+
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#2962FF</color>
+    <color name="colorAccent40Alfa">#662962FF</color>
+    <color name="background">#FAFAFA</color>
 </resources>
