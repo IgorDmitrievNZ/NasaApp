@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.BottomNavigationLayoutBinding
 import com.example.android.nasaapp.ui.chips.ChipsFragment
+import com.example.android.nasaapp.ui.constraint.ConstraintFragment
 import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.NavBottomActivity
 import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.ViewPagerActivity
 import com.example.android.nasaapp.utils.openFragment
@@ -29,6 +30,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //burger list open fragments and activities
+
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
 
             when (menuItem.itemId) {
@@ -41,8 +44,11 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                 R.id.navigation_lesson_one -> {
                     openFragment(requireActivity(), ChipsFragment.newInstance(), backStackName)
                 }
+                R.id.navigation_constraint_lesson4 -> {
+                    openFragment(requireActivity(), ConstraintFragment.newInstance(), backStackName)
+                }
             }
-
+            dismiss() //closes drop-down menu
             true
         }
     }
