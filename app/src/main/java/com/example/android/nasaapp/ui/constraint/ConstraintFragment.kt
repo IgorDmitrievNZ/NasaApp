@@ -24,7 +24,7 @@ class ConstraintFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        binding.group1.visibility = View.GONE
+//        binding.group1.visibility = View.GONE
 //        binding.group2.visibility = View.INVISIBLE
 
         //аналогично
@@ -33,11 +33,12 @@ class ConstraintFragment : Fragment() {
         binding.materialButton11.visibility  =View.VISIBLE
         binding.materialButton22.visibility  =View.VISIBLE*/
 
-        binding.materialButton3.setOnClickListener {
-            binding.group1.visibility = View.VISIBLE
+//        binding.materialButton3.setOnClickListener {
+//            binding.group1.visibility = View.VISIBLE
 //            binding.group2.visibility = View.VISIBLE
-        }
-                //fragment_constraint2
+//        }
+        
+                //fragment_constraint_group_barrier
 //        binding.materialButton33.setOnClickListener {
 //            binding.group1.visibility = View.GONE
 //            binding.group2.visibility = View.INVISIBLE
