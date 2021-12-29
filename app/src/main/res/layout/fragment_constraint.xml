@@ -4,19 +4,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="materialButton1,materialButton2"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="materialButton11,materialButton22"/>
+
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierH"
+        android:id="@+id/barrierH1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="end"
         app:constraint_referenced_ids="materialButton1,materialButton2" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierV"
+        android:id="@+id/barrierV1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="materialButton1,materialButton2" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierH2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="materialButton11,materialButton22" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierV2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="materialButton11,materialButton22" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -41,7 +67,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3"
-        app:layout_constraintStart_toStartOf="@id/barrierH"
-        app:layout_constraintTop_toBottomOf="@id/barrierV" />
+        app:layout_constraintStart_toStartOf="@id/barrierH1"
+        app:layout_constraintTop_toBottomOf="@id/barrierV1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        app:layout_constraintStart_toStartOf="@id/barrierH2"
+        app:layout_constraintTop_toBottomOf="@id/barrierV2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
