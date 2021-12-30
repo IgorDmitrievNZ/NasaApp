@@ -15,6 +15,12 @@
         android:title="@string/chips" />
     <item
         android:id="@+id/navigation_constraint_lesson4"
+        android:icon="@drawable/ic_education_24"
         android:title="@string/constraint" />
+
+    <item
+        android:id="@+id/navigation_coordinator_lesson4"
+        android:icon="@drawable/ic_education_24"
+        android:title="@string/coordinator" />
 
 </menu>

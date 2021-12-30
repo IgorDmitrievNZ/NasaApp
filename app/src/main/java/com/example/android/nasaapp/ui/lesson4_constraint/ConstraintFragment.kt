@@ -1,4 +1,4 @@
-package com.example.android.nasaapp.ui.constraint
+package com.example.android.nasaapp.ui.lesson4_constraint
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -37,7 +37,7 @@ class ConstraintFragment : Fragment() {
 //            binding.group1.visibility = View.VISIBLE
 //            binding.group2.visibility = View.VISIBLE
 //        }
-        
+
                 //fragment_constraint_group_barrier
 //        binding.materialButton33.setOnClickListener {
 //            binding.group1.visibility = View.GONE
