@@ -10,7 +10,7 @@ import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.ItemMarsListBinding
 import com.example.android.nasaapp.repository.mars_api.MarsPhotoDetails
 
-class MarsPhotosAdapter :
+class MarsPhotosAdapter(private val itemClickListener: MarsHomeWorkFragment.OnItemViewClickListener) :
     RecyclerView.Adapter<MarsPhotosAdapter.MarsPhotosListViewHolder>() {
 
     private var marsPhotoData: List<MarsPhotoDetails> = listOf()
@@ -41,6 +41,7 @@ class MarsPhotosAdapter :
                 error(R.drawable.ic_load_error_vector)
                 placeholder(R.drawable.ic_no_photo_vector)
             }
+            root.setOnClickListener { itemClickListener.onItemViewClick(marsPhoto) }
         }
     }
 }

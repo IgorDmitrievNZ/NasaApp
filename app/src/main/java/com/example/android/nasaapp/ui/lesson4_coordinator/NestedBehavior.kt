@@ -2,10 +2,8 @@ package com.example.android.nasaapp.ui.lesson4_coordinator
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.widget.NestedScrollView
 import com.google.android.material.appbar.AppBarLayout
 
 class NestedBehavior(context: Context? = null, attr: AttributeSet? = null) :

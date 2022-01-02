@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.android.nasaapp.R
-import com.example.android.nasaapp.databinding.FragmentPictureOfTheDayBinding
+import com.example.android.nasaapp.databinding.FragmentPictureOfTheDayStartBinding
 import com.example.android.nasaapp.ui.AppState
 import com.example.android.nasaapp.ui.MainActivity
 import com.example.android.nasaapp.ui.mars.NavBottomActivityMars
@@ -39,8 +39,8 @@ class PictureOfTheDayFragment : Fragment() {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
-    private var _binding: FragmentPictureOfTheDayBinding? = null
-    private val binding: FragmentPictureOfTheDayBinding
+    private var _binding: FragmentPictureOfTheDayStartBinding? = null
+    private val binding: FragmentPictureOfTheDayStartBinding
         get() {
             return _binding!!
         }
@@ -55,7 +55,7 @@ class PictureOfTheDayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
+        _binding = FragmentPictureOfTheDayStartBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -159,12 +159,6 @@ class PictureOfTheDayFragment : Fragment() {
                     NavBottomActivityMars::class.java
                 )
             )
-
-//            R.id.app_bar_telescope -> openFragment(
-//                requireActivity(),
-//                MarsHomeWorkFragment.newInstance(),
-//                backStackName
-//            )
 
             R.id.app_bar_fav -> Toast.makeText(context, "favorite", Toast.LENGTH_SHORT).show()
 
