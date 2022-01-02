@@ -8,12 +8,16 @@ import com.example.android.nasaapp.ui.mars.mars_weather.MarsWeatherFragment
 import com.example.android.nasaapp.ui.mars.planets.PlanetsFragment
 
 class NavBottomActivityMars : AppCompatActivity() {
+
     lateinit var binding: ActivityBottomNavigationMarsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBottomNavigationMarsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, MarsHomeWorkFragment.newInstance()).commit()
 
         //click listener for bottom navigation
         binding.bottomNavigationViewMars.setOnItemSelectedListener {
@@ -39,5 +43,4 @@ class NavBottomActivityMars : AppCompatActivity() {
             }
         }
     }
-
 }

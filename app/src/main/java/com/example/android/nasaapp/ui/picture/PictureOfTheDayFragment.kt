@@ -160,12 +160,6 @@ class PictureOfTheDayFragment : Fragment() {
                 )
             )
 
-//            R.id.app_bar_telescope -> openFragment(
-//                requireActivity(),
-//                MarsHomeWorkFragment.newInstance(),
-//                backStackName
-//            )
-
             R.id.app_bar_fav -> Toast.makeText(context, "favorite", Toast.LENGTH_SHORT).show()
 
             R.id.app_bar_settings -> openFragment(

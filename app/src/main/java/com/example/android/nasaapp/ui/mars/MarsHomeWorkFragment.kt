@@ -10,7 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.FragmentMarsHomeWorkBinding
+import com.example.android.nasaapp.repository.mars_api.MarsPhotoDetails
+import com.example.android.nasaapp.ui.mars.mars_photos.DetailsPhotoFragment
 
 class MarsHomeWorkFragment : Fragment() {
 
@@ -60,9 +63,24 @@ class MarsHomeWorkFragment : Fragment() {
             }
             MarsHomeWorkViewModel.State.SUCCESS -> {
                 progressBar.isVisible = false
-                adapter = MarsPhotosAdapter().apply {
+
+                adapter = MarsPhotosAdapter(object : OnItemViewClickListener {
+                    override fun onItemViewClick(photos: MarsPhotoDetails) {
+                        val manager = activity?.supportFragmentManager
+                        manager?.let { manager ->
+                            val bundle = Bundle().apply {
+                                putParcelable(DetailsPhotoFragment.BUNDLE_EXTRA, photos)
+                            }
+                            manager.beginTransaction()
+                                .replace(R.id.container, DetailsPhotoFragment.newInstance(bundle))
+                                .addToBackStack("")
+                                .commit()
+                        }
+                    }
+                }).apply {
                     setMarsPhoto(viewModel.getMarsPhotos())
                 }
+
                 marsFragmentRecyclerView.adapter = adapter
                 marsFragmentRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             }
@@ -72,5 +90,9 @@ class MarsHomeWorkFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = MarsHomeWorkFragment()
+    }
+
+    interface OnItemViewClickListener {
+        fun onItemViewClick(photos: MarsPhotoDetails)
     }
 }
