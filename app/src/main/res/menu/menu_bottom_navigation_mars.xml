@@ -10,4 +10,9 @@
         android:icon="@drawable/ic_mars"
         android:title="@string/current_weather" />
 
+    <item
+        android:id="@+id/bottomViewPlanets"
+        android:icon="@drawable/ic_system"
+        android:title="@string/planets" />
+
 </menu>

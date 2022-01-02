@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.ActivityBottomNavigationMarsBinding
 import com.example.android.nasaapp.ui.mars.mars_weather.MarsWeatherFragment
+import com.example.android.nasaapp.ui.mars.planets.PlanetsFragment
 
 class NavBottomActivityMars : AppCompatActivity() {
     lateinit var binding: ActivityBottomNavigationMarsBinding
@@ -25,6 +26,11 @@ class NavBottomActivityMars : AppCompatActivity() {
                 R.id.bottomViewCurrentWeather -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, MarsWeatherFragment.newInstance()).commit()
+                    true
+                }
+                R.id.bottomViewPlanets -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, PlanetsFragment.newInstance()).commit()
                     true
                 }
                 else -> {

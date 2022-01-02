@@ -24,4 +24,5 @@
     <string name="not_yet_implemented">Not yet implemented.</string>
     <string name="constraint">Constraint</string>
     <string name="coordinator">Coordinator</string>
+    <string name="planets">Planets</string>
 </resources>
