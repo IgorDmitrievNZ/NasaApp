@@ -1,6 +1,7 @@
 package com.example.android.nasaapp.ui.animations_lesson5
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -15,8 +16,8 @@ class AnimationsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnimationsBinding
 
     private var isTextViewVisible = false
-    private var isButtonViewVisible = true
-    private var isExpand= false
+    private var isExpand = false
+    private var isDirectionRight = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +52,6 @@ class AnimationsActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.bottom_view_earth -> {
-                    isButtonViewVisible = false
-                    binding.button.visibility = if (isButtonViewVisible) View.VISIBLE else View.GONE
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, RecyclerAnimationFragment.newInstance()).commit()
                     true
@@ -89,6 +88,25 @@ class AnimationsActivity : AppCompatActivity() {
             transition.duration = 2000
             TransitionManager.beginDelayedTransition(binding.transitionsContainer, transition)
             binding.text.visibility = if (isTextViewVisible) View.VISIBLE else View.GONE
+        }
+
+            // click listener for buttonPath shows animation using special trajectory
+        binding.buttonPath.setOnClickListener {
+            isDirectionRight = !isDirectionRight
+            val params = binding.buttonPath.layoutParams as FrameLayout.LayoutParams
+            params.gravity = if (isDirectionRight) {
+                Gravity.CENTER or Gravity.END
+            } else {
+                Gravity.TOP or Gravity.START
+            }
+            val transition = ChangeBounds()
+            val path = ArcMotion()
+            //path.maximumAngle = 90f  //tuning the angle
+            transition.setPathMotion(path)
+            transition.duration = 3000
+            TransitionManager.beginDelayedTransition(binding.container, transition)
+
+            binding.buttonPath.layoutParams = params
         }
     }
 }
