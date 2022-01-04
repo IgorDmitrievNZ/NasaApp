@@ -80,7 +80,7 @@ class RecyclerAnimationFragment : Fragment() {
         }
 
     }
-    
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     companion object {

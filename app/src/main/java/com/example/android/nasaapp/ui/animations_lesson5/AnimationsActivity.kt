@@ -2,11 +2,10 @@ package com.example.android.nasaapp.ui.animations_lesson5
 
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.transition.ChangeBounds
-import androidx.transition.Fade
-import androidx.transition.TransitionManager
-import androidx.transition.TransitionSet
+import androidx.transition.*
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.ActivityAnimationsBinding
 import com.example.android.nasaapp.ui.animations_lesson5.recycler.RecyclerAnimationFragment
@@ -17,11 +16,36 @@ class AnimationsActivity : AppCompatActivity() {
 
     private var isTextViewVisible = false
     private var isButtonViewVisible = true
+    private var isExpand= false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAnimationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //on click listener for blowing up the picture
+        binding.imageView.setOnClickListener {
+            isExpand = !isExpand
+
+            val params = binding.imageView.layoutParams as FrameLayout.LayoutParams
+
+            val transitionSet = TransitionSet()
+            val transitionCB = ChangeBounds()
+            val transitionImage = ChangeImageTransform()
+            transitionCB.duration = 2000
+            transitionImage.duration = 2000
+            transitionSet.addTransition(transitionCB)
+            transitionSet.addTransition(transitionImage)
+            TransitionManager.beginDelayedTransition(binding.container, transitionSet)
+
+            if (isExpand) {
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                params.height = FrameLayout.LayoutParams.MATCH_PARENT
+            } else {
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                params.height = FrameLayout.LayoutParams.WRAP_CONTENT
+            }
+        }
 
         //click listener for bottom navigation
         binding.bottomNavigationView.setOnItemSelectedListener {
@@ -47,6 +71,7 @@ class AnimationsActivity : AppCompatActivity() {
             }
         }
 
+        // click listener for button shows some animation
         binding.button.setOnClickListener {
             isTextViewVisible = !isTextViewVisible
 
