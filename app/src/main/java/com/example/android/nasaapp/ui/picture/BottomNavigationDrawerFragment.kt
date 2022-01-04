@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.BottomNavigationLayoutBinding
-import com.example.android.nasaapp.ui.anomations_lesson5.AnimationsActivity
+import com.example.android.nasaapp.ui.animations_lesson5.AnimationsActivity
 import com.example.android.nasaapp.ui.chips.ChipsFragment
 import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.NavBottomActivity
 import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.ViewPagerActivity

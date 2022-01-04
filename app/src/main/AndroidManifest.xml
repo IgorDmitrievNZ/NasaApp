@@ -51,7 +51,7 @@
         </activity>
 
         <activity
-            android:name=".ui.anomations_lesson5.AnimationsActivity"
+            android:name=".ui.animations_lesson5.AnimationsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

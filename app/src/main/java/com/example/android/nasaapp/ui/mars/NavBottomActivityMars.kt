@@ -16,6 +16,7 @@ class NavBottomActivityMars : AppCompatActivity() {
         binding = ActivityBottomNavigationMarsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //opens default fragment in activity
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, MarsHomeWorkFragment.newInstance()).commit()
 
