@@ -23,4 +23,9 @@
         android:icon="@drawable/ic_education_24"
         android:title="@string/coordinator" />
 
+    <item
+        android:id="@+id/navigation_animations"
+        android:icon="@drawable/ic_education_24"
+        android:title="@string/animations" />
+
 </menu>

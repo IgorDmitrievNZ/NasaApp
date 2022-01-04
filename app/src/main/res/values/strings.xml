@@ -25,4 +25,5 @@
     <string name="constraint">Constraint</string>
     <string name="coordinator">Coordinator</string>
     <string name="planets">Planets</string>
+    <string name="animations">Animations</string>
 </resources>
