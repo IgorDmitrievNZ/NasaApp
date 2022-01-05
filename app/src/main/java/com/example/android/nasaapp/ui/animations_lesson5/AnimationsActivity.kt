@@ -62,7 +62,8 @@ class AnimationsActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_view_system -> {
-
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, ObjectAnimatorFragment()).commit()
                     true
                 }
                 else -> {
