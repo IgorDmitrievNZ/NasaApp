@@ -26,16 +26,19 @@ class ConstraintSetFragment : BaseFragment<FragmentConstraintSetBinding>() {
         binding.root.setOnClickListener {
             val constraintSetStart = ConstraintSet()
             constraintSetStart.clone(requireContext(), R.layout.fragment_constraint_set)
-            constraintSetStart.connect(R.id.title,ConstraintSet.END,R.id.backgroundImage,ConstraintSet.END)
-            constraintSetStart.connect(R.id.description,ConstraintSet.TOP,R.id.title,ConstraintSet.BOTTOM)
-            /*val constraintSetEnd = ConstraintSet()
-            constraintSetEnd.clone(this,R.layout.activity_animations_end)*/
+
+            //constraintSetStart.connect(R.id.title,ConstraintSet.END,R.id.backgroundImage,ConstraintSet.END)  //
+           // constraintSetStart.connect(R.id.description,ConstraintSet.TOP,R.id.title,ConstraintSet.BOTTOM)
+
+            val constraintSetEnd = ConstraintSet()
+            constraintSetEnd.clone(requireContext(),R.layout.fragment_constraint_set_end)
 
             val transition = ChangeBounds()
             transition.duration = 1000
-            transition.interpolator = AnticipateOvershootInterpolator(1f)
+            transition.interpolator = AnticipateOvershootInterpolator(2f)
             TransitionManager.beginDelayedTransition(binding.root,transition)
-            constraintSetStart.applyTo(binding.constraintContainer)
+            //constraintSetStart.applyTo(binding.constraintContainer)
+            constraintSetEnd.applyTo(binding.constraintContainer)
         }
     }
 }
