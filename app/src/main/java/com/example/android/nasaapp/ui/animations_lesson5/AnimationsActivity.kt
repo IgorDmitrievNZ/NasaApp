@@ -72,7 +72,8 @@ class AnimationsActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_view_system3 -> {
-
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, ConstraintSetFragment()).commit()
                     true
                 }
                 else -> {
