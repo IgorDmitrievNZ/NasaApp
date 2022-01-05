@@ -15,4 +15,14 @@
         android:icon="@drawable/ic_system"
         android:title="@string/system" />
 
+    <item
+        android:id="@+id/bottom_view_system2"
+        android:icon="@drawable/ic_system"
+        android:title="@string/system" />
+
+    <item
+        android:id="@+id/bottom_view_system3"
+        android:icon="@drawable/ic_system"
+        android:title="@string/system" />
+
 </menu>

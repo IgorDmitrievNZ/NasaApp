@@ -66,6 +66,15 @@ class AnimationsActivity : AppCompatActivity() {
                         .replace(R.id.container, ObjectAnimatorFragment()).commit()
                     true
                 }
+                R.id.bottom_view_system2 -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, StataListAnimatorFragment()).commit()
+                    true
+                }
+                R.id.bottom_view_system3 -> {
+
+                    true
+                }
                 else -> {
                     false
                 }
