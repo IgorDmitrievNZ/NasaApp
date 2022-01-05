@@ -57,7 +57,8 @@ class AnimationsActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_view_mars -> {
-
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, Lesson5Fragment.newInstance()).commit()
                     true
                 }
                 R.id.bottom_view_system -> {
@@ -90,7 +91,7 @@ class AnimationsActivity : AppCompatActivity() {
             binding.text.visibility = if (isTextViewVisible) View.VISIBLE else View.GONE
         }
 
-            // click listener for buttonPath shows animation using special trajectory
+        // click listener for buttonPath shows animation using special trajectory
         binding.buttonPath.setOnClickListener {
             isDirectionRight = !isDirectionRight
             val params = binding.buttonPath.layoutParams as FrameLayout.LayoutParams
