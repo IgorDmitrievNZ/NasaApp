@@ -28,4 +28,9 @@
         android:icon="@drawable/ic_education_24"
         android:title="@string/animations" />
 
+    <item
+        android:id="@+id/navigation_recycler"
+        android:icon="@drawable/ic_education_24"
+        android:title="@string/recycler" />
+
 </menu>

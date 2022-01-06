@@ -1,4 +1,4 @@
-package com.example.android.nasaapp.ui.animations_lesson5.recycler
+package com.example.android.nasaapp.ui.lesson5_animations.recycler
 
 import android.graphics.Rect
 import android.os.Bundle

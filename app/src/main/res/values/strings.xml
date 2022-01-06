@@ -26,4 +26,5 @@
     <string name="coordinator">Coordinator</string>
     <string name="planets">Planets</string>
     <string name="animations">Animations</string>
+    <string name="recycler">Recycler</string>
 </resources>

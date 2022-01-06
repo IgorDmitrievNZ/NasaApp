@@ -1,4 +1,4 @@
-package com.example.android.nasaapp.ui.animations_lesson5
+package com.example.android.nasaapp.ui.lesson5_animations
 
 import android.os.Bundle
 import android.view.Gravity
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.transition.*
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.ActivityAnimationsBinding
-import com.example.android.nasaapp.ui.animations_lesson5.recycler.RecyclerAnimationFragment
+import com.example.android.nasaapp.ui.lesson5_animations.recycler.RecyclerAnimationFragment
 
 class AnimationsActivity : AppCompatActivity() {
 
