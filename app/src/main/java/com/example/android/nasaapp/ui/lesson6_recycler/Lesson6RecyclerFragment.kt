@@ -29,13 +29,14 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
             Data("Earth", type = TYPE_EARTH),
             Data("Mars", null, type = TYPE_MARS)
         )
+        data.add(0,Data("Title",type= TYPE_HEADER))
 
         binding.recyclerView.adapter = RecyclerLesson6Adapter(data,
             object : MyCallback {
                 override fun onClick(position: Int) {
                     Toast.makeText(
                         requireContext(),
-                        "РАБОТАЕТ ${data[position].someText} ${data[position].someDescription}",
+                        "Works ${data[position].someText} ${data[position].someDescription}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

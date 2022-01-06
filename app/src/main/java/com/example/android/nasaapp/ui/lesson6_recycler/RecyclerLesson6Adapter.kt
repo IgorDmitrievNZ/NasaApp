@@ -5,14 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.nasaapp.databinding.ItemRecyclerEarthBinding
+import com.example.android.nasaapp.databinding.ItemRecyclerHeaderBinding
 import com.example.android.nasaapp.databinding.ItemRecyclerMarsBinding
 
 class RecyclerLesson6Adapter(
     private val data: List<Data>,
     private val callbackListener: MyCallback
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<BaseViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         //getting binding
         return when (viewType) {
             TYPE_EARTH -> {
@@ -23,6 +24,14 @@ class RecyclerLesson6Adapter(
                         false
                     )
                 EarthViewHolder(bindingViewHolder.root)
+            }
+            TYPE_HEADER -> {
+                val bindingViewHolder = ItemRecyclerHeaderBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                HeaderViewHolder(bindingViewHolder.root)
             }
             else -> {
                 val bindingViewHolder = ItemRecyclerMarsBinding.inflate(
@@ -39,23 +48,26 @@ class RecyclerLesson6Adapter(
         return data[position].type
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        return when (getItemViewType(position)) {
-            TYPE_EARTH -> {
-                (holder as EarthViewHolder).bind(data[position])
-            }
-            else -> {
-                (holder as MarsViewHolder).bind(data[position])
-            }
-        }
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+
+//        return when (getItemViewType(position)) {
+//            TYPE_EARTH -> {
+//                (holder as EarthViewHolder).bind(data[position])   //old one version
+//            }
+//            else -> {
+//                (holder as MarsViewHolder).bind(data[position])
+//            }
+//        }
+        
+        holder.bind(data[position])      // new version
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    inner class EarthViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(data: Data) {
+    inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bind(data: Data) {
             ItemRecyclerEarthBinding.bind(itemView).apply {
                 someTextTextView.text = data.someText
                 descriptionTextView.text = data.someDescription
@@ -66,11 +78,22 @@ class RecyclerLesson6Adapter(
         }
     }
 
-    inner class MarsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(data: Data) {
+    inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bind(data: Data) {
             ItemRecyclerMarsBinding.bind(itemView).apply {
                 someTextTextView.text = data.someText
                 marsImageView.setOnClickListener {
+                    callbackListener.onClick(layoutPosition)
+                }
+            }
+        }
+    }
+
+    inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bind(data: Data) {
+            ItemRecyclerHeaderBinding.bind(itemView).apply {
+                header.text = data.someText
+                root.setOnClickListener {
                     callbackListener.onClick(layoutPosition)
                 }
             }
