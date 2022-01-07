@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.android.nasaapp.BaseFragment
 import com.example.android.nasaapp.databinding.FragmentLesson6RecyclerBinding
 
@@ -40,7 +41,7 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
         coordinate1.first
         coordinate1.second
         val coordinate3d = Triple(1, 2, 3)  // just an example
-        coordinate3d.first
+        coordinate3d.first                                     // this section is showing how Pair works
         coordinate3d.second
         coordinate3d.third
 // *************************************************************************************************
@@ -59,5 +60,6 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
         binding.recyclerActivityFAB.setOnClickListener {
             adapter.appendItem()
         }
+        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
     }
 }

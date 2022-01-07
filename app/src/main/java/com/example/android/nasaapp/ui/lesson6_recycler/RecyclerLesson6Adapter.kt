@@ -1,5 +1,6 @@
 package com.example.android.nasaapp.ui.lesson6_recycler
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,16 +10,16 @@ import com.example.android.nasaapp.databinding.ItemRecyclerHeaderBinding
 import com.example.android.nasaapp.databinding.ItemRecyclerMarsBinding
 
 class RecyclerLesson6Adapter(
-    private val data: MutableList<Pair<Data,Boolean>>,
+    private val data: MutableList<Pair<Data, Boolean>>,
     private val callbackListener: MyCallback
-) : RecyclerView.Adapter<BaseViewHolder>() {
+) : RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
     fun appendItem() {
         data.add(generateItem())
         notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateItem(): Pair<Data,Boolean> {
+    private fun generateItem(): Pair<Data, Boolean> {
         return Data(someText = "Mars") to false
     }
 
@@ -76,7 +77,7 @@ class RecyclerLesson6Adapter(
     }
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Pair<Data,Boolean>) {
+        override fun bind(data: Pair<Data, Boolean>) {
             ItemRecyclerEarthBinding.bind(itemView).apply {
                 someTextTextView.text = data.first.someText
                 descriptionTextView.text = data.first.someDescription
@@ -87,8 +88,8 @@ class RecyclerLesson6Adapter(
         }
     }
 
-    inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Pair<Data,Boolean>) {
+    inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
+        override fun bind(data: Pair<Data, Boolean>) {
             ItemRecyclerMarsBinding.bind(itemView).apply {
                 someTextTextView.text = data.first.someText
 
@@ -107,7 +108,7 @@ class RecyclerLesson6Adapter(
                 moveItemUp.setOnClickListener {
                     moveUp()
                 }
-                marsDescriptionTextView.visibility = if(data.second) View.VISIBLE else View.GONE
+                marsDescriptionTextView.visibility = if (data.second) View.VISIBLE else View.GONE
 
                 someTextTextView.setOnClickListener {
                     toggleDescription()
@@ -145,17 +146,38 @@ class RecyclerLesson6Adapter(
             data.removeAt(layoutPosition)
             notifyItemRemoved(layoutPosition)
         }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.RED)
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
     }
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Pair<Data,Boolean>) {
+        override fun bind(data: Pair<Data, Boolean>) {
             ItemRecyclerHeaderBinding.bind(itemView).apply {
                 header.text = data.first.someText
+
                 root.setOnClickListener {
                     callbackListener.onClick(layoutPosition)
                 }
             }
         }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        data.removeAt(fromPosition).apply {
+            data.add(toPosition, this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        data.removeAt(position)
+        notifyItemRemoved(position)
     }
 
 
