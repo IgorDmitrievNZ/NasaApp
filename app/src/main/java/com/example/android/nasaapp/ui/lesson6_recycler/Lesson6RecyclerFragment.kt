@@ -21,7 +21,8 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         val data = arrayListOf(
-            Data("Earth", type = TYPE_EARTH)/*,
+            Data("Earth", type = TYPE_EARTH) to false,
+            Data("Mars", "", type = TYPE_MARS) to false/*,
             Data("Earth", type = TYPE_EARTH),
             Data("Mars", "", type = TYPE_MARS),
             Data("Earth", type = TYPE_EARTH),
@@ -29,14 +30,27 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
             Data("Earth", type = TYPE_EARTH),
             Data("Mars", null, type = TYPE_MARS)*/
         )
-        data.add(0,Data("Title",type= TYPE_HEADER))
+        data.add(0, Data("Title", type = TYPE_HEADER) to false)
+
+//  ************************************************************************************************
+        val lat = 55
+        val lon = 37
+        val coordinate1 = lat to lon
+        val coordinate2 = Pair(lat, lon)
+        coordinate1.first
+        coordinate1.second
+        val coordinate3d = Triple(1, 2, 3)  // just an example
+        coordinate3d.first
+        coordinate3d.second
+        coordinate3d.third
+// *************************************************************************************************
 
         val adapter = RecyclerLesson6Adapter(data,
             object : MyCallback {
                 override fun onClick(position: Int) {
                     Toast.makeText(
                         requireContext(),
-                        "Works ${data[position].someText} ${data[position].someDescription}",
+                        "Works ${data[position].first.someText} ${data[position].first.someDescription}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

@@ -9,7 +9,7 @@ import com.example.android.nasaapp.databinding.ItemRecyclerHeaderBinding
 import com.example.android.nasaapp.databinding.ItemRecyclerMarsBinding
 
 class RecyclerLesson6Adapter(
-    private val data: MutableList<Data>,
+    private val data: MutableList<Pair<Data,Boolean>>,
     private val callbackListener: MyCallback
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
@@ -18,8 +18,8 @@ class RecyclerLesson6Adapter(
         notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateItem(): Data {
-        return Data(someText = "Mars")
+    private fun generateItem(): Pair<Data,Boolean> {
+        return Data(someText = "Mars") to false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -54,7 +54,7 @@ class RecyclerLesson6Adapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return data[position].type
+        return data[position].first.type
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
@@ -76,10 +76,10 @@ class RecyclerLesson6Adapter(
     }
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Data,Boolean>) {
             ItemRecyclerEarthBinding.bind(itemView).apply {
-                someTextTextView.text = data.someText
-                descriptionTextView.text = data.someDescription
+                someTextTextView.text = data.first.someText
+                descriptionTextView.text = data.first.someDescription
                 wikiImageView.setOnClickListener {
                     callbackListener.onClick(layoutPosition)
                 }
@@ -88,9 +88,9 @@ class RecyclerLesson6Adapter(
     }
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Data,Boolean>) {
             ItemRecyclerMarsBinding.bind(itemView).apply {
-                someTextTextView.text = data.someText
+                someTextTextView.text = data.first.someText
 
                 marsImageView.setOnClickListener {
                     callbackListener.onClick(layoutPosition)
@@ -101,8 +101,41 @@ class RecyclerLesson6Adapter(
                 removeItemImageView.setOnClickListener {
                     removeItem()
                 }
+                moveItemDown.setOnClickListener {
+                    moveDown()
+                }
+                moveItemUp.setOnClickListener {
+                    moveUp()
+                }
+                marsDescriptionTextView.visibility = if(data.second) View.VISIBLE else View.GONE
+
+                someTextTextView.setOnClickListener {
+                    toggleDescription()
+                }
             }
         }
+
+        private fun toggleDescription() {
+            data[layoutPosition] = data[layoutPosition].run {
+                first to !second
+            }
+            notifyItemChanged(layoutPosition)
+        }
+
+        private fun moveUp() { // FIXME ДЗ убрать ошиюбку java.lang.IndexOutOfBoundsException
+            data.removeAt(layoutPosition).apply {
+                data.add(layoutPosition - 1, this)
+            }
+            notifyItemMoved(layoutPosition, layoutPosition - 1)
+        }
+
+        private fun moveDown() { // FIXME ДЗ убрать ошиюбку java.lang.IndexOutOfBoundsException
+            data.removeAt(layoutPosition).apply {
+                data.add(layoutPosition + 1, this)
+            }
+            notifyItemMoved(layoutPosition, layoutPosition + 1)
+        }
+
         private fun addItemToPosition() {
             data.add(layoutPosition, generateItem())
             notifyItemInserted(layoutPosition)
@@ -115,9 +148,9 @@ class RecyclerLesson6Adapter(
     }
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Data,Boolean>) {
             ItemRecyclerHeaderBinding.bind(itemView).apply {
-                header.text = data.someText
+                header.text = data.first.someText
                 root.setOnClickListener {
                     callbackListener.onClick(layoutPosition)
                 }
