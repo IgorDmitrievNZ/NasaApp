@@ -9,9 +9,18 @@ import com.example.android.nasaapp.databinding.ItemRecyclerHeaderBinding
 import com.example.android.nasaapp.databinding.ItemRecyclerMarsBinding
 
 class RecyclerLesson6Adapter(
-    private val data: List<Data>,
+    private val data: MutableList<Data>,
     private val callbackListener: MyCallback
 ) : RecyclerView.Adapter<BaseViewHolder>() {
+
+    fun appendItem() {
+        data.add(generateItem())
+        notifyItemInserted(itemCount - 1)
+    }
+
+    private fun generateItem(): Data {
+        return Data(someText = "Mars")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         //getting binding
@@ -58,7 +67,7 @@ class RecyclerLesson6Adapter(
 //                (holder as MarsViewHolder).bind(data[position])
 //            }
 //        }
-        
+
         holder.bind(data[position])      // new version
     }
 
@@ -82,10 +91,26 @@ class RecyclerLesson6Adapter(
         override fun bind(data: Data) {
             ItemRecyclerMarsBinding.bind(itemView).apply {
                 someTextTextView.text = data.someText
+
                 marsImageView.setOnClickListener {
                     callbackListener.onClick(layoutPosition)
                 }
+                addItemImageView.setOnClickListener {
+                    addItemToPosition()
+                }
+                removeItemImageView.setOnClickListener {
+                    removeItem()
+                }
             }
+        }
+        private fun addItemToPosition() {
+            data.add(layoutPosition, generateItem())
+            notifyItemInserted(layoutPosition)
+        }
+
+        private fun removeItem() {
+            data.removeAt(layoutPosition)
+            notifyItemRemoved(layoutPosition)
         }
     }
 
@@ -99,4 +124,6 @@ class RecyclerLesson6Adapter(
             }
         }
     }
+
+
 }

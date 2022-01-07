@@ -21,17 +21,17 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         val data = arrayListOf(
-            Data("Earth", type = TYPE_EARTH),
+            Data("Earth", type = TYPE_EARTH)/*,
             Data("Earth", type = TYPE_EARTH),
             Data("Mars", "", type = TYPE_MARS),
             Data("Earth", type = TYPE_EARTH),
             Data("Earth", type = TYPE_EARTH),
             Data("Earth", type = TYPE_EARTH),
-            Data("Mars", null, type = TYPE_MARS)
+            Data("Mars", null, type = TYPE_MARS)*/
         )
         data.add(0,Data("Title",type= TYPE_HEADER))
 
-        binding.recyclerView.adapter = RecyclerLesson6Adapter(data,
+        val adapter = RecyclerLesson6Adapter(data,
             object : MyCallback {
                 override fun onClick(position: Int) {
                     Toast.makeText(
@@ -40,7 +40,10 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
             })
+        binding.recyclerView.adapter = adapter
+        binding.recyclerActivityFAB.setOnClickListener {
+            adapter.appendItem()
+        }
     }
 }
