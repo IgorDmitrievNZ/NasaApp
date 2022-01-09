@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MotionEventCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.nasaapp.databinding.ItemRecyclerEarthBinding
 import com.example.android.nasaapp.databinding.ItemRecyclerHeaderBinding
@@ -22,13 +23,20 @@ class RecyclerLesson6Adapter(
         fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
     }
 
+    fun setItems(newItems: List<Pair<Data, Boolean>>) {
+        val result = DiffUtil.calculateDiff(DiffUtilCallback(data, newItems))
+        result.dispatchUpdatesTo(this)
+        data.clear()
+        data.addAll(newItems)
+    }
+
     fun appendItem() {
         data.add(generateItem())
         notifyItemInserted(itemCount - 1)
     }
 
     private fun generateItem(): Pair<Data, Boolean> {
-        return Data(someText = "Mars") to false
+        return Data((0..9999999).random(), someText = "Mars") to false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -66,18 +74,66 @@ class RecyclerLesson6Adapter(
         return data[position].first.type
     }
 
+//    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+//
+////        return when (getItemViewType(position)) {
+////            TYPE_EARTH -> {
+////                (holder as EarthViewHolder).bind(data[position])   //old one version
+////            }
+////            else -> {
+////                (holder as MarsViewHolder).bind(data[position])
+////            }
+////        }
+//
+//        holder.bind(data[position])      // new version
+//    }
+
+    /*override fun onBindViewHolder(
+       holder: BaseViewHolder,
+       position: Int,
+       payloads: MutableList<Any>
+   ) {
+       if (payloads.isEmpty())
+           super.onBindViewHolder(holder, position, payloads)
+       else {
+           val combinedChange =
+               createCombinedPayload(payloads as MutableList<Change<Pair<Data, Boolean>>>)
+           val oldData = combinedChange.oldData
+           val newData = combinedChange.newData
+           if (newData.first.someText != oldData.first.someText) {
+               ActivityRecyclerItemMarsBinding.bind(holder.itemView).marsTextView.text = newData.first.someText
+           }
+       }
+   }*/
+
+
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            val combinedChange =
+                createCombinedPayload(payloads as MutableList<Change<Pair<Data, Boolean>>>)
+            val oldData = combinedChange.oldData
+            val newData = combinedChange.newData
+            Log.d(
+                "mylogs", "${(1..9999999).random()} ${
+                    newData.first.someText != oldData.first.someText
+                }"
+            )
+
+
+            ItemRecyclerMarsBinding.bind(holder.itemView).someTextTextView.text =
+                newData.first.someText
+
+        }
+    }
+
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-
-//        return when (getItemViewType(position)) {
-//            TYPE_EARTH -> {
-//                (holder as EarthViewHolder).bind(data[position])   //old one version
-//            }
-//            else -> {
-//                (holder as MarsViewHolder).bind(data[position])
-//            }
-//        }
-
-        holder.bind(data[position])      // new version
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
@@ -122,9 +178,9 @@ class RecyclerLesson6Adapter(
                     toggleDescription()
                 }
 
-                dragHandleImageView.setOnTouchListener{v, event->
-                    Log.d("mylogs","setOnTouchListener $event")
-                    if(MotionEventCompat.getActionMasked(event)== MotionEvent.ACTION_DOWN){ // TODO This method will be removed in a future release.
+                dragHandleImageView.setOnTouchListener { v, event ->
+                    Log.d("mylogs", "setOnTouchListener $event")
+                    if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) { // TODO This method will be removed in a future release.
                         onStartDragListener.onStartDrag(this@MarsViewHolder)
                     }
                     false

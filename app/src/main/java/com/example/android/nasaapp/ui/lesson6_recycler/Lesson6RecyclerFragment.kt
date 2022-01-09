@@ -14,6 +14,9 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
 
     lateinit var itemTouchHelper: ItemTouchHelper
 
+    private var isNewList = false
+    private lateinit var adapter: RecyclerLesson6Adapter
+
     override fun inflateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -25,8 +28,8 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         val data = arrayListOf(
-            Data("Earth", type = TYPE_EARTH) to false,
-            Data("Mars", "", type = TYPE_MARS) to false/*,
+            Data(0, "Earth", type = TYPE_EARTH) to false,
+            Data(1, "Mars", "", type = TYPE_MARS) to false/*,
             Data("Earth", type = TYPE_EARTH),
             Data("Mars", "", type = TYPE_MARS),
             Data("Earth", type = TYPE_EARTH),
@@ -34,7 +37,7 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
             Data("Earth", type = TYPE_EARTH),
             Data("Mars", null, type = TYPE_MARS)*/
         )
-        data.add(0, Data("Title", type = TYPE_HEADER) to false)
+        data.add(0, Data(3, "Title", type = TYPE_HEADER) to false)
 
 //  ************************************************************************************************
         val lat = 55
@@ -49,7 +52,7 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
         coordinate3d.third
 // *************************************************************************************************
 
-        val adapter = RecyclerLesson6Adapter(data,
+        adapter = RecyclerLesson6Adapter(data,
             object : MyCallback {
                 override fun onClick(position: Int) {
                     Toast.makeText(
@@ -65,10 +68,39 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
             }
         )
         binding.recyclerView.adapter = adapter
+
+        binding.recyclerActivityDiffUtilFAB.setOnClickListener {
+            adapter.setItems(createItemList(isNewList).map { it })
+            isNewList = !isNewList
+        }
+
         binding.recyclerActivityFAB.setOnClickListener {
             adapter.appendItem()
         }
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+    }
+
+    private fun createItemList(instanceNumber: Boolean): List<Pair<Data, Boolean>> {
+        return when (instanceNumber) {
+            false -> listOf(
+                Pair(Data(0, "Header"), false),
+                Pair(Data(1, "Mars", ""), false),
+                Pair(Data(2, "Mars", ""), false),
+                Pair(Data(3, "Mars", ""), false),
+                Pair(Data(4, "Mars", ""), false),
+                Pair(Data(5, "Mars", ""), false),
+                Pair(Data(6, "Mars", ""), false)
+            )
+            true -> listOf(
+                Pair(Data(0, "Header"), false),
+                Pair(Data(1, "Mars", ""), false),
+                Pair(Data(2, "Jupiter", ""), false),
+                Pair(Data(3, "Mars", ""), false),
+                Pair(Data(4, "Neptune", ""), false),
+                Pair(Data(5, "Saturn", ""), false),
+                Pair(Data(7, "Mars", ""), false)
+            )
+        }
     }
 }
