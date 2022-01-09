@@ -1,9 +1,12 @@
 package com.example.android.nasaapp.ui.lesson6_recycler
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.nasaapp.databinding.ItemRecyclerEarthBinding
 import com.example.android.nasaapp.databinding.ItemRecyclerHeaderBinding
@@ -11,8 +14,13 @@ import com.example.android.nasaapp.databinding.ItemRecyclerMarsBinding
 
 class RecyclerLesson6Adapter(
     private val data: MutableList<Pair<Data, Boolean>>,
-    private val callbackListener: MyCallback
+    private val callbackListener: MyCallback,
+    private val onStartDragListener: OnStartDragListener
 ) : RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
+
+    interface OnStartDragListener {
+        fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
+    }
 
     fun appendItem() {
         data.add(generateItem())
@@ -112,6 +120,14 @@ class RecyclerLesson6Adapter(
 
                 someTextTextView.setOnClickListener {
                     toggleDescription()
+                }
+
+                dragHandleImageView.setOnTouchListener{v, event->
+                    Log.d("mylogs","setOnTouchListener $event")
+                    if(MotionEventCompat.getActionMasked(event)== MotionEvent.ACTION_DOWN){ // TODO This method will be removed in a future release.
+                        onStartDragListener.onStartDrag(this@MarsViewHolder)
+                    }
+                    false
                 }
             }
         }

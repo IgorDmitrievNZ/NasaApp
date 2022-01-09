@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.nasaapp.BaseFragment
 import com.example.android.nasaapp.databinding.FragmentLesson6RecyclerBinding
 
 class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
+
+    lateinit var itemTouchHelper: ItemTouchHelper
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -55,11 +58,17 @@ class Lesson6RecyclerFragment : BaseFragment<FragmentLesson6RecyclerBinding>() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            })
+            }, object : RecyclerLesson6Adapter.OnStartDragListener {
+                override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
+                    itemTouchHelper.startDrag(viewHolder)
+                }
+            }
+        )
         binding.recyclerView.adapter = adapter
         binding.recyclerActivityFAB.setOnClickListener {
             adapter.appendItem()
         }
-        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
+        itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }
 }
