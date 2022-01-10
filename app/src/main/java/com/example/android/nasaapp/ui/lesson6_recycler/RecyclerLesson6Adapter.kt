@@ -1,12 +1,12 @@
 package com.example.android.nasaapp.ui.lesson6_recycler
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.nasaapp.databinding.ItemRecyclerEarthBinding
@@ -153,6 +153,7 @@ class RecyclerLesson6Adapter(
     }
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
+        @SuppressLint("ClickableViewAccessibility")
         override fun bind(data: Pair<Data, Boolean>) {
             ItemRecyclerMarsBinding.bind(itemView).apply {
                 someTextTextView.text = data.first.someText
@@ -178,15 +179,25 @@ class RecyclerLesson6Adapter(
                     toggleDescription()
                 }
 
+                fun onTouch(motionEvent: MotionEvent): Int {
+                    val action = motionEvent.actionMasked;
+                    return action
+                }
+
+                /** The are performing with the touch event is only visual.
+                 * It doesn't affect the actual working of the app.
+                 * That is the reason why we used "android.annotation.SuppressLint" to silence the warning **/
+
                 dragHandleImageView.setOnTouchListener { v, event ->
                     Log.d("mylogs", "setOnTouchListener $event")
-                    if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) { // TODO This method will be removed in a future release.
+                    if (onTouch(event) == MotionEvent.ACTION_DOWN) {
                         onStartDragListener.onStartDrag(this@MarsViewHolder)
                     }
                     false
                 }
             }
         }
+
 
         private fun toggleDescription() {
             data[layoutPosition] = data[layoutPosition].run {
@@ -263,6 +274,5 @@ class RecyclerLesson6Adapter(
         data.removeAt(position)
         notifyItemRemoved(position)
     }
-
 
 }
