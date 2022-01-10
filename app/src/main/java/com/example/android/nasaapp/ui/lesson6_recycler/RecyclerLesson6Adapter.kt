@@ -195,18 +195,30 @@ class RecyclerLesson6Adapter(
             notifyItemChanged(layoutPosition)
         }
 
-        private fun moveUp() { // FIXME ДЗ убрать ошиюбку java.lang.IndexOutOfBoundsException
-            data.removeAt(layoutPosition).apply {
-                data.add(layoutPosition - 1, this)
+        /**
+         * Notice the "it> 1" predicate in the moveUp method. We deliberately leave the first list item
+         * untouched because it is a header and should always stay at the top. If the position allows
+         * the element to be moved, then we change the data in the array: we delete and place the element
+         * again at the desired position. And we call the notifyItemMoved method with arguments:
+         * current position, desired position. The animation for moving the item is taken over by the RecyclerView.
+         **/
+
+        private fun moveUp() {
+            layoutPosition.takeIf { it > 1 }?.also { currentPosition ->
+                data.removeAt(currentPosition).apply {
+                    data.add(currentPosition - 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition - 1)
             }
-            notifyItemMoved(layoutPosition, layoutPosition - 1)
         }
 
-        private fun moveDown() { // FIXME ДЗ убрать ошиюбку java.lang.IndexOutOfBoundsException
-            data.removeAt(layoutPosition).apply {
-                data.add(layoutPosition + 1, this)
+        private fun moveDown() {
+            layoutPosition.takeIf { it < data.size - 1 }?.also { currentPosition ->
+                data.removeAt(currentPosition).apply {
+                    data.add(currentPosition + 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition + 1)
             }
-            notifyItemMoved(layoutPosition, layoutPosition + 1)
         }
 
         private fun addItemToPosition() {
