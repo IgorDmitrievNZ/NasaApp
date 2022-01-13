@@ -7,6 +7,7 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -133,6 +134,7 @@ class PictureOfTheDayFragment : Fragment() {
                         binding.includeBottomSheet.bottomSheetDescription.typeface =
                             resources.getFont(R.font.a) //TODO fix Resources$NotFoundException for "aladin" font, "a" font is working well. I think the proplem is aladin is google play but not preloaded one
                     }
+
                 }
                 val title = pictureOfTheDayResponseData.title
                 includeBottomSheet.bottomSheetDescriptionHeader.setText(title).toString()
