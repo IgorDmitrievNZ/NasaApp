@@ -3,7 +3,9 @@ package com.example.android.nasaapp.ui.picture
 import BottomNavigationDrawerFragment
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -117,10 +119,22 @@ class PictureOfTheDayFragment : Fragment() {
                 }
                 loadImage(currentUrl)
 
-                val description = pictureOfTheDayResponseData.explanation
-                val title = pictureOfTheDayResponseData.title
+                pictureOfTheDayResponseData.explanation?.let {
+                    binding.includeBottomSheet.bottomSheetDescription.text = it
+                    // binding.includeBottomSheet.bottomSheetDescription.typeface = Typeface.createFromAsset(requireContext().assets,"Robus-BWqOd.otf")
+                    binding.includeBottomSheet.bottomSheetDescription.typeface =
+                        Typeface.createFromAsset(
+                            requireContext().assets,
+                            "font/Robus-BWqOd.otf"
+                        )
 
-                includeBottomSheet.bottomSheetDescription.setText(description).toString()
+                    //set the font
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        binding.includeBottomSheet.bottomSheetDescription.typeface =
+                            resources.getFont(R.font.a) //TODO fix Resources$NotFoundException for "aladin" font, "a" font is working well. I think the proplem is aladin is google play but not preloaded one
+                    }
+                }
+                val title = pictureOfTheDayResponseData.title
                 includeBottomSheet.bottomSheetDescriptionHeader.setText(title).toString()
             }
         }
