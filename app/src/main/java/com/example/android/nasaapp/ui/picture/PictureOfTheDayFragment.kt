@@ -19,6 +19,7 @@ import com.example.android.nasaapp.databinding.FragmentPictureOfTheDayStartBindi
 import com.example.android.nasaapp.ui.AppState
 import com.example.android.nasaapp.ui.MainActivity
 import com.example.android.nasaapp.ui.mars.NavBottomActivityMars
+import com.example.android.nasaapp.ui.notes.Hw6FragmentNotesRecycler
 import com.example.android.nasaapp.ui.settings.SettingsFragment
 import com.example.android.nasaapp.utils.openFragment
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -160,7 +161,11 @@ class PictureOfTheDayFragment : Fragment() {
                 )
             )
 
-            R.id.app_bar_fav -> Toast.makeText(context, "favorite", Toast.LENGTH_SHORT).show()
+            R.id.app_bar_notes -> openFragment(
+                requireActivity(),
+                Hw6FragmentNotesRecycler(),
+                backStackName
+            )  // open notes icon
 
             R.id.app_bar_settings -> openFragment(
                 requireActivity(),

@@ -3,7 +3,7 @@ package com.example.android.nasaapp.ui.lesson6_recycler
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemTouchHelperCallback(private val adapter: RecyclerLesson6Adapter) :
+class ItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapterInterface) :
     ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(

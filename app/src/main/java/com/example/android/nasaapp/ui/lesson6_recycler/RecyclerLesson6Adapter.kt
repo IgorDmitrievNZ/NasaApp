@@ -17,7 +17,7 @@ class RecyclerLesson6Adapter(
     private val data: MutableList<Pair<Data, Boolean>>,
     private val callbackListener: MyCallback,
     private val onStartDragListener: OnStartDragListener
-) : RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
+) : RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapterInterface {
 
     interface OnStartDragListener {
         fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
