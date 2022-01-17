@@ -13,7 +13,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_marginTop="@dimen/dim_10dp"
-        android:text="@string/description"
+        android:text="@string/description_eng"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
