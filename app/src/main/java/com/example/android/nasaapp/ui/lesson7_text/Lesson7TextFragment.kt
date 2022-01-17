@@ -10,6 +10,7 @@ import android.text.style.ImageSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.example.android.nasaapp.BaseFragment
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.FragmentLeson7TextBinding
@@ -31,20 +32,20 @@ class Lesson7TextFragment : BaseFragment<FragmentLeson7TextBinding>() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             spannableMutable.setSpan(
-                BulletSpan(20, resources.getColor(R.color.colorAccent), 20),
+                BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.colorAccent), 20),
                 0, 30, Spannable.SPAN_INCLUSIVE_INCLUSIVE
             )
             spannableMutable.setSpan(
-                BulletSpan(20, resources.getColor(R.color.colorAccent), 20),
+                BulletSpan(20,ContextCompat.getColor(requireContext(),R.color.colorAccent), 20),
                 4, 21, Spannable.SPAN_INCLUSIVE_INCLUSIVE
             )
             spannableMutable.setSpan(
-                BulletSpan(20, resources.getColor(R.color.colorAccent), 20),
+                BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.colorAccent), 20),
                 11, 21, Spannable.SPAN_INCLUSIVE_INCLUSIVE
             )
         }
 
-        spannableMutable.setSpan(BulletSpan(20,resources.getColor(R.color.colorAccent)),
+        spannableMutable.setSpan(BulletSpan(20,ContextCompat.getColor(requireContext(),R.color.colorAccent)),
             21,spannableMutable.length,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
 
         for (i in spannableMutable.indices) {
