@@ -32,31 +32,39 @@ class Lesson7TextFragment : BaseFragment<FragmentLeson7TextBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spannableMutable = SpannableStringBuilder("My \n text \n text \nbullet one \nbullet two")
+        val spannableMutable =
+            SpannableStringBuilder("My \n text \n text \nbullet one \nbullet two")
         val spannableUnMutable = SpannableString("My text \nbullet one \nbullet two")
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             spannableMutable.setSpan(
-                BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.colorAccent), 20),
+                BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.colorAccent), 20),
                 0, 30, Spannable.SPAN_INCLUSIVE_INCLUSIVE
             )
             spannableMutable.setSpan(
-                BulletSpan(20,ContextCompat.getColor(requireContext(),R.color.colorAccent), 20),
+                BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.colorAccent), 20),
                 4, 21, Spannable.SPAN_INCLUSIVE_INCLUSIVE
             )
             spannableMutable.setSpan(
-                BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.colorAccent), 20),
+                BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.colorAccent), 20),
                 11, 21, Spannable.SPAN_INCLUSIVE_INCLUSIVE
             )
         }
 
-        spannableMutable.setSpan(BulletSpan(20,ContextCompat.getColor(requireContext(),R.color.colorAccent)),
-            21,spannableMutable.length,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        spannableMutable.setSpan(
+            BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.colorAccent)),
+            21, spannableMutable.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
 
         for (i in spannableMutable.indices) {
             if (spannableMutable[i] == 'o') {
-                spannableMutable.setSpan(ImageSpan(requireContext(), R.drawable.ic_earth), i, i + 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                spannableMutable.setSpan(
+                    ImageSpan(requireContext(), R.drawable.ic_earth),
+                    i,
+                    i + 1,
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
             }
         }
 
@@ -64,7 +72,7 @@ class Lesson7TextFragment : BaseFragment<FragmentLeson7TextBinding>() {
 
         val text = binding.textView2.text
         val spannableStart = SpannableStringBuilder(text)
-        binding.textView2.setText(spannableStart,TextView.BufferType.EDITABLE)
+        binding.textView2.setText(spannableStart, TextView.BufferType.EDITABLE)
         val spannable = binding.textView2.text as SpannableStringBuilder
         initSpans(spannable)
 
@@ -78,9 +86,10 @@ class Lesson7TextFragment : BaseFragment<FragmentLeson7TextBinding>() {
                     R.color.colorAccent
                 )
             ),
-            0, 10, Spannable.SPAN_EXCLUSIVE_INCLUSIVE // FIXME EXCLUSIVE_INCLUSIVE
+            0, 10, Spannable.SPAN_INCLUSIVE_INCLUSIVE
         )
-        spannable.insert(0, "1")
+        spannable.insert(0, "***")
+        spannable.insert(9, "***")
         spannable.insert(10, "\n")
         spannable.insert(20, "\n")
 
@@ -103,7 +112,7 @@ class Lesson7TextFragment : BaseFragment<FragmentLeson7TextBinding>() {
             )
         }
         spannable.setSpan(
-            q, 0, 20, Spannable.SPAN_EXCLUSIVE_INCLUSIVE // FIXME EXCLUSIVE_INCLUSIVE
+            q, 0, 20, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )
         val qq = QuoteSpan(
             ContextCompat.getColor(
@@ -112,20 +121,21 @@ class Lesson7TextFragment : BaseFragment<FragmentLeson7TextBinding>() {
             )
         )
         spannable.setSpan(
-            qq, 10, 19, Spannable.SPAN_EXCLUSIVE_INCLUSIVE // FIXME EXCLUSIVE_INCLUSIVE
+            qq, 10, 19, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )
 
         val requestCallback = FontRequest(
             "com.google.android.gms.fonts", "com.google.android.gms",
             "Aguafina Script", R.array.com_google_android_gms_fonts_certs
         )
-        val callback = object : FontsContractCompat.FontRequestCallback(){
+        val callback = object : FontsContractCompat.FontRequestCallback() {
             override fun onTypefaceRetrieved(typeface: Typeface?) {
                 typeface?.let {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         spannable.setSpan(
                             TypefaceSpan(it),
-                            30,150, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                            30, 150, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                        )
                         //spannable.insert(0, "1")
                     }
                 }
@@ -136,7 +146,7 @@ class Lesson7TextFragment : BaseFragment<FragmentLeson7TextBinding>() {
             }
         }
         val handler = Handler(Looper.getMainLooper())
-        FontsContractCompat.requestFont(requireContext(),requestCallback,callback,handler)
+        FontsContractCompat.requestFont(requireContext(), requestCallback, callback, handler)
 
     }
 }
