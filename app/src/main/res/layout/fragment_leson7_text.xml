@@ -4,16 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnRecyclerView"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recycler View" />
-
-    <Button
-        android:id="@+id/btnLesson7Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lesson 7 text" />
+        android:id="@+id/textView"/>
 
 </LinearLayout>
