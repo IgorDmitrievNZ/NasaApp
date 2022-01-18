@@ -2,6 +2,7 @@ package com.example.android.nasaapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.ActivityMainBinding
 import com.example.android.nasaapp.ui.picture.PictureOfTheDayFragment
 
@@ -11,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        setTheme(R.style.Theme_NasaApp)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(
-                    com.example.android.nasaapp.R.id.container,
+                    R.id.container,
                     PictureOfTheDayFragment.newInstance()
                 ).commit()
         }
