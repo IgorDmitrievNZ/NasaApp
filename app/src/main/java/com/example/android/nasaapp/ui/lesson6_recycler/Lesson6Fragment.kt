@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.example.android.nasaapp.BaseFragment
 import com.example.android.nasaapp.databinding.FragmentLesson6Binding
 import com.example.android.nasaapp.ui.lesson7_text.Lesson7TextFragment
+import com.example.android.nasaapp.ui.lesson8.TestTextFragment
 import com.example.android.nasaapp.utils.openFragment
 
 class Lesson6Fragment : BaseFragment<FragmentLesson6Binding>() {
@@ -27,6 +28,10 @@ class Lesson6Fragment : BaseFragment<FragmentLesson6Binding>() {
 
         binding.btnLesson7Text.setOnClickListener {
             openFragment(requireActivity(), Lesson7TextFragment(), "")
+        }
+
+        binding.btnLesson8Text.setOnClickListener {
+            openFragment(requireActivity(), TestTextFragment(), "")
         }
     }
 }

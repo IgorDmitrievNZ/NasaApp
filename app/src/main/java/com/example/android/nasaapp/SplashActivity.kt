@@ -29,16 +29,16 @@ class SplashActivity : AppCompatActivity() {
         ).duration = 3000*/
 
         val animator =
-            ObjectAnimator.ofFloat(findViewById<ImageView>(R.id.imageView33), View.SCALE_Y, -1f);
-        animator.duration = 500
-        animator.repeatCount = 5
+            ObjectAnimator.ofFloat(findViewById<ImageView>(R.id.imageView33), View.SCALE_X, -1f);
+        animator.duration = 700
+        animator.repeatCount = 3
         animator.repeatMode = ObjectAnimator.REVERSE
         animator.start()
 
         handler.postDelayed(Runnable {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
-        }, 2000)
+        }, 3000)
     }
 
     override fun onBackPressed() {
