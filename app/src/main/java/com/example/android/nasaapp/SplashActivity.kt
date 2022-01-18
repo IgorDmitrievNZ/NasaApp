@@ -13,11 +13,11 @@ import com.example.android.nasaapp.ui.MainActivity
 @SuppressLint("CustomSplashScreen") //FIXME что ты такое
 class SplashActivity : AppCompatActivity() {
 
-//    private val handler: Handler by lazy {
-//        Handler(mainLooper)
-//    }
+    /*private val handler: Handler by lazy {   // another way to get handler
+        Handler(mainLooper)
+    }*/
 
-    lateinit var handler: Handler  //FIXME problem with back press when loading
+    lateinit var handler: Handler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +37,13 @@ class SplashActivity : AppCompatActivity() {
 
         handler.postDelayed(Runnable {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
         }, 2000)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onBackPressed() {
+        super.onBackPressed()
         handler.removeCallbacksAndMessages(null)
+        onDestroy()
     }
 }
