@@ -1,4 +1,4 @@
-package com.example.android.nasaapp.ui.animations_lesson5
+package com.example.android.nasaapp.ui.lesson5_animations
 
 import android.os.Bundle
 import android.view.Gravity

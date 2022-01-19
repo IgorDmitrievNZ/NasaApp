@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recycler View" />
+
+    <Button
+        android:id="@+id/btnLesson7Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lesson 7 text" />
+
+    <Button
+        android:id="@+id/btnLesson8Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lesson 8 text" />
+
+    <Button
+        android:id="@+id/btnLesson8Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lesson 8 button" />
+
+</LinearLayout>

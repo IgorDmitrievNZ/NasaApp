@@ -26,4 +26,9 @@
     <string name="coordinator">Coordinator</string>
     <string name="planets">Planets</string>
     <string name="animations">Animations</string>
+    <string name="recycler">Recycler</string>
+    <string name="description">Марс — четвёртая по удалённости от Солнца и седьмая по размерам планета Солнечной системы. Названа в честь Марса — древнеримского бога войны, соответствующего древнегреческому Аресу. Иногда Марс называют «красной планетой» из-за красноватого оттенка поверхности, придаваемого ей минералом маггемитом (оксидом железа).</string>
+    <string name="open_note">Open note</string>
+    <string name="type_your_text">Type your text</string>
+    <string name="description_eng">Mars is the fourth largest planet from the Sun and the seventh largest planet in the solar system. Named after Mars, the ancient Roman god of war, corresponding to the ancient Greek Ares. Sometimes Mars is called the "red planet" because of the reddish hue of the surface, given to it by the mineral magnetite (iron oxide).</string>
 </resources>

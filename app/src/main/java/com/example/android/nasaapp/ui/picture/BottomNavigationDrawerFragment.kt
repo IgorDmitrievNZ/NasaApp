@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.android.nasaapp.R
 import com.example.android.nasaapp.databinding.BottomNavigationLayoutBinding
-import com.example.android.nasaapp.ui.animations_lesson5.AnimationsActivity
+import com.example.android.nasaapp.ui.lesson5_animations.AnimationsActivity
 import com.example.android.nasaapp.ui.chips.ChipsFragment
 import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.NavBottomActivity
 import com.example.android.nasaapp.ui.lesson3_bot_nav__tab_layout.ViewPagerActivity
 import com.example.android.nasaapp.ui.lesson4_constraint.ConstraintFragment
 import com.example.android.nasaapp.ui.lesson4_coordinator.CoordinatorFragment
+import com.example.android.nasaapp.ui.lesson6_recycler.Lesson6Fragment
 import com.example.android.nasaapp.utils.openFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -54,6 +55,9 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                 }
                 R.id.navigation_animations -> {
                     startActivity(Intent(requireContext(), AnimationsActivity::class.java))
+                }
+                R.id.navigation_recycler -> {
+                    openFragment(requireActivity(), Lesson6Fragment(), backStackName)
                 }
             }
             dismiss() //closes drop-down menu

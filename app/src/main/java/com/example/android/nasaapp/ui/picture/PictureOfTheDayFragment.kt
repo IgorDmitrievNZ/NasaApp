@@ -3,13 +3,24 @@ package com.example.android.nasaapp.ui.picture
 import BottomNavigationDrawerFragment
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.text.style.TypefaceSpan
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import androidx.core.provider.FontRequest
+import androidx.core.provider.FontsContractCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +30,7 @@ import com.example.android.nasaapp.databinding.FragmentPictureOfTheDayStartBindi
 import com.example.android.nasaapp.ui.AppState
 import com.example.android.nasaapp.ui.MainActivity
 import com.example.android.nasaapp.ui.mars.NavBottomActivityMars
+import com.example.android.nasaapp.ui.notes.Hw6FragmentNotesRecycler
 import com.example.android.nasaapp.ui.settings.SettingsFragment
 import com.example.android.nasaapp.utils.openFragment
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -116,13 +128,70 @@ class PictureOfTheDayFragment : Fragment() {
                 }
                 loadImage(currentUrl)
 
-                val description = pictureOfTheDayResponseData.explanation
+                pictureOfTheDayResponseData.explanation?.let {
+                    includeBottomSheet.bottomSheetDescription.text = it
+                    includeBottomSheet.bottomSheetDescription.typeface =
+                        Typeface.createFromAsset(
+                            requireContext().assets,
+                            "font/Robus-BWqOd.otf"
+                        )
+
+                    //set the font
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        val sp = SpannableStringBuilder(it)
+
+                        val requestCallback = FontRequest(
+                            "com.google.android.gms.fonts", "com.google.android.gms",
+                            "iceberg", R.array.com_google_android_gms_fonts_certs
+                        )
+                        val callback = object : FontsContractCompat.FontRequestCallback() {
+                            override fun onTypefaceRetrieved(typeface: Typeface?) {
+                                typeface?.let {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                        sp.setSpan(
+                                            TypefaceSpan(it),
+                                            0, sp.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                        val handler = Handler(Looper.getMainLooper())
+                        FontsContractCompat.requestFont(
+                            requireContext(),
+                            requestCallback,
+                            callback,
+                            handler
+                        )
+
+                    }
+
+                }
                 val title = pictureOfTheDayResponseData.title
 
-                includeBottomSheet.bottomSheetDescription.setText(description).toString()
-                includeBottomSheet.bottomSheetDescriptionHeader.setText(title).toString()
+                val spannableStart = SpannableStringBuilder(title)
+                includeBottomSheet.bottomSheetDescriptionHeader.setText(
+                    spannableStart,
+                    TextView.BufferType.EDITABLE
+                )
+                val spannable =
+                    includeBottomSheet.bottomSheetDescriptionHeader.text as SpannableStringBuilder
+                initSpans(spannable)
             }
         }
+    }
+
+    private fun initSpans(spannable: SpannableStringBuilder) {
+        spannable.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorAccent
+                )
+            ),
+            0, spannable.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+
     }
 
     private fun loadImage(url: String?) {
@@ -160,7 +229,11 @@ class PictureOfTheDayFragment : Fragment() {
                 )
             )
 
-            R.id.app_bar_fav -> Toast.makeText(context, "favorite", Toast.LENGTH_SHORT).show()
+            R.id.app_bar_notes -> openFragment(
+                requireActivity(),
+                Hw6FragmentNotesRecycler(),
+                backStackName
+            )  // open notes icon
 
             R.id.app_bar_settings -> openFragment(
                 requireActivity(),
