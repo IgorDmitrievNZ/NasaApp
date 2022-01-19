@@ -2,11 +2,14 @@ package com.example.android.nasaapp.ui.lesson6_recycler
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.os.Build
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.nasaapp.databinding.ItemRecyclerEarthBinding
@@ -153,6 +156,7 @@ class RecyclerLesson6Adapter(
     }
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
+        @RequiresApi(Build.VERSION_CODES.N)
         @SuppressLint("ClickableViewAccessibility")
         override fun bind(data: Pair<Data, Boolean>) {
             ItemRecyclerMarsBinding.bind(itemView).apply {
@@ -173,7 +177,11 @@ class RecyclerLesson6Adapter(
                 moveItemUp.setOnClickListener {
                     moveUp()
                 }
+
                 marsDescriptionTextView.visibility = if (data.second) View.VISIBLE else View.GONE
+
+                val text = "My <h1> text </h1> <h2> text </h2> <ul><li>bullet one</li><li>bullet two</li></ul>"  //set text by html method
+                marsDescriptionTextView.text = Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT)
 
                 someTextTextView.setOnClickListener {
                     toggleDescription()

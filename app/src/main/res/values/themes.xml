@@ -61,4 +61,8 @@
         <item name="colorPrimarySurface">@color/color_black</item>
     </style>
 
+    <style name="Theme.NasaApp.Splash">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
+    </style>
+
 </resources>
